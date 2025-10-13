@@ -5,6 +5,14 @@
 - P3214-V (non-PTZ) - Preview Image only. Possibly not supported by VAPIX Library. Firmware v6.50.5.8.
 - P3364 (non-PTZ) - Preview Image only. Possibly not supported by VAPIX Library. Firmware v6.50.5.8.
 
+## 1st August 2024 - Glen Gorton
+- Within Result() function, added below code check for unsupported model# to prevent script setting a compromised Status. Preview Image will still be polled with OK status maintained.
+- if (code == 404.0) and (string.match(data, "The requested URL was not found on this server")) then
+   SetStatus(0, string.format("", code))
+   print("Camera model number likely does not support VAPIX Library. eg. P3214-V or P3364")
+   -- P3214-V (non-PTZ), P3364 (non-PTZ) - Preview Image only. Possibly not supported by VAPIX Library. Firmware v6.50.5.8.
+  return end 
+
 ## 30th July 2024 - Glen Gorton
 - Within Capture() function, added the camera icon to the button when the 'Preview Image Toggle' is off. Moved this logic to be inside the previewTimer.EventHandler.
 - Within Initialize() and Connect() functions, changed the 'Preview Image' to the camera icon.
